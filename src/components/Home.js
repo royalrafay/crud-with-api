@@ -6,6 +6,7 @@ import axios from "axios";
 export const Home = (props) => {
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [refetch, setRefetch] = useState(false);
   const navigate = useNavigate();
   const handleAddUser = () => {
     navigate("create");
@@ -19,8 +20,18 @@ export const Home = (props) => {
         setUsers(res.data);
         setIsLoading(false);
       })
+      .catch(() => alert("something went wrong on get api"));
+  }, [refetch]);
+
+  const handleDelete = (id) => {
+    axios
+      .delete(`http://localhost:5000/users/${id}`)
+      .then(() => {
+        setRefetch(!refetch);
+        alert("user deleted succesfully");
+      })
       .catch(() => alert("something went wrong"));
-  }, []);
+  };
   return (
     <div>
       <br />
@@ -29,28 +40,39 @@ export const Home = (props) => {
       <br />
       <br />
       {isLoading && <p>loading....</p>}
-      {!isLoading &&<Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>name</th>
-            <th>age</th>
-            <th>address</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((user, index) => {
-            return (
-              <tr>
-                <td>{index + 1}</td>
-                <td>{user.name}</td>
-                <td>{user.age}</td>
-                <td>{user.address}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </Table>}
+      {!isLoading && (
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>name</th>
+              <th>age</th>
+              <th>address</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map((user, index) => {
+              return (
+                <tr>
+                  <td>{index + 1}</td>
+                  <td>{user.name}</td>
+                  <td>{user.age}</td>
+                  <td>{user.address}</td>
+                  <td>
+                    <Button
+                      onClick={() => {
+                        handleDelete(user.id);
+                      }}
+                    >
+                      delete
+                    </Button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </Table>
+      )}
     </div>
   );
 };
