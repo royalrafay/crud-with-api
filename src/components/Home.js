@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 
 export const Home = (props) => {
@@ -55,7 +55,9 @@ export const Home = (props) => {
               return (
                 <tr>
                   <td>{index + 1}</td>
-                  <td>{user.name}</td>
+                  <td>
+                    <Link to={`view/${user.id}`}>{user.name}</Link>
+                  </td>
                   <td>{user.age}</td>
                   <td>{user.address}</td>
                   <td>
@@ -66,6 +68,10 @@ export const Home = (props) => {
                     >
                       delete
                     </Button>
+                    {"  "}
+                    <Link to={`edit/${user.id}`}>
+                      <Button>update</Button>
+                    </Link>
                   </td>
                 </tr>
               );

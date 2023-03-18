@@ -1,3 +1,22 @@
 {
-  "users": []
+  "users": [
+    {
+      "name": "uzair",
+      "age": "35",
+      "address": "nanded",
+      "id": "5dc652f9-dc19-449b-9af0-5381d3e410ac"
+    },
+    {
+      "name": "khizer uddin",
+      "age": "39",
+      "address": "kolkata",
+      "id": "991fde4e-365d-4110-8e30-fb1f4554e6c0"
+    },
+    {
+      "name": " mohammad mazhar",
+      "age": "35",
+      "address": "Navi mumbai",
+      "id": "e71f2a31-dcbf-41db-937d-6f5e68a36451"
+    }
+  ]
 }
